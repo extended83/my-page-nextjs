@@ -1,8 +1,13 @@
 import {defineRouting} from 'next-intl/routing';
 
 export const routing = defineRouting({
-  locales: ['pl', 'en'],
-  defaultLocale: 'pl'
-});
+  locales: ['en', 'pl'],
+  defaultLocale: 'en',
+  localePrefix: 'always', // prefiks w URL dla KAŻDEGO języka
+  pathnames: {
+    '/': '/',
 
-export type Locale = (typeof routing.locales)[number];
+    // lokalizowane slugi
+    '/about': { en: '/about', pl: '/o-nas' }
+  }
+});
