@@ -1,0 +1,14 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "plugins": ["import"],
+  "rules": {
+    "import/no-unresolved": "error"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      }
+    }
+  }
+}

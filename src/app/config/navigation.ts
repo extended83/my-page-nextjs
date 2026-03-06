@@ -1,28 +1,28 @@
 export interface NavItem {
   label: string;
   href: string;
-  description?: string;
+  description: string;
 }
 
 export const NAV_ITEMS: NavItem[] = [
   {
-    label: "Strona Główna",
+    label: "home",
     href: "/",
-    description: "Powrót do strony głównej",
+    description: "homeDescription",
   },
   {
-    label: "O nas",
+    label: "about",
     href: "/about",
-    description: "Dowiedz się więcej o naszej firmie",
+    description: "aboutDescription",
   },
   {
-    label: "Oferta",
+    label: "offer",
     href: "/offer",
-    description: "Zobacz nasze usługi",
+    description: "offerDescription",
   },
   {
-    label: "Kontakt",
+    label: "contact",
     href: "/contact",
-    description: "Skontaktuj się z nami",
+    description: "contactDescription",
   },
 ];
