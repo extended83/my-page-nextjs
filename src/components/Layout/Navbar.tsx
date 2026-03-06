@@ -3,6 +3,7 @@
 import { NAV_ITEMS } from '@/app/config/navigation';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { LocaleSwitcher } from './LocaleSwitcher';
 
 
 const Navbar = () => {
@@ -20,6 +21,7 @@ const Navbar = () => {
                 isActive={pathname === item.href}
               />
             ))}
+            <LocaleSwitcher />
           </div>
         </div>
       </div>

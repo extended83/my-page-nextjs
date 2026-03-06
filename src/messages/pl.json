@@ -1,4 +1,14 @@
 {
+  "Navigation": {
+    "home": "Strona główna",
+    "homeDescription": "Powrót do strony głównej",
+    "about": "O nas",
+    "aboutDescription": "Dowiedz się więcej o naszej firmie",
+    "offer": "Oferta",
+    "offerDescription": "Zobacz nasze usługi",
+    "contact": "Kontakt",
+    "contactDescription": "Skontaktuj się z nami"
+  },
   "About": {
     "title": "O nas",
     "desc": "To jest strona o nas."

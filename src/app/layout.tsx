@@ -1,40 +1,13 @@
-import { ReactNode } from 'react';
-import type { Metadata } from 'next';
-import {NextIntlClientProvider} from 'next-intl';
-import { Inter } from 'next/font/google';
-import './globals.css';
-import Navbar from '@/components/Layout/Navbar';
+import { ReactNode } from "react";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
+const inter = Inter({ subsets: ["latin"] });
 
-const inter = Inter({ subsets: ['latin'] });
-
-export const metadata: Metadata = {
-  title: 'Moja Strona - Profesjonalne Usługi',
-  description: 'Oferujemy profesjonalne usługi web developmentu',
-};
-
-
-export default async function RootLayout({
-  children,
-  params: {locale}
-}: {
-  children: ReactNode;
-  params: {locale: string};
-}) {
-
-
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang={locale}>
-      <body className={inter.className}>
-       <NextIntlClientProvider>
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <main className="flex-grow">
-            {children}
-          </main>
-        </div>
-        </NextIntlClientProvider>
-      </body>
+    <html>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
