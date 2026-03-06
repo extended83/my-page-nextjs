@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { NAV_ITEMS } from '@/app/config/navigation';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { LocaleSwitcher } from './LocaleSwitcher';
-
+import { NAV_ITEMS } from "@/app/config/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { LocaleSwitcher } from "./LocaleSwitcher";
+import { useTranslations } from "use-intl";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex space-x-4">
             {NAV_ITEMS.map((item) => (
-              <NavLink 
+              <NavLink
                 key={item.href}
                 item={item}
                 isActive={pathname === item.href}
@@ -39,18 +39,20 @@ interface NavLinkProps {
 }
 
 const NavLink = ({ item, isActive }: NavLinkProps) => {
+  const t = useTranslations("Navigation");
+
   return (
     <Link
       href={item.href}
       className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
         isActive
-          ? 'text-blue-600 bg-blue-50'
-          : 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
+          ? "text-blue-600 bg-blue-50"
+          : "text-gray-700 hover:text-blue-600 hover:bg-gray-100"
       }`}
       title={item.description}
-      aria-current={isActive ? 'page' : undefined}
+      aria-current={isActive ? "page" : undefined}
     >
-      {item.label}
+      {t(item.label)}
     </Link>
   );
 };
