@@ -27,15 +27,11 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider>
-          <div className="min-h-screen flex flex-col">
-            <Navbar />
-            <main className="flex-grow">{children}</main>
-          </div>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow">{children}</main>
+      </div>
+    </NextIntlClientProvider>
   );
 }
