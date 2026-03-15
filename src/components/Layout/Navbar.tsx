@@ -1,12 +1,21 @@
 "use client";
 
-import { NAV_ITEMS } from "@/app/config/navigation";
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
+import { NavItem } from "@/app/types/navigation";
 import { LocaleSwitcher } from "./LocaleSwitcher";
-import { useTranslations } from "use-intl";
 
-const Navbar = () => {
+interface NavbarProps {
+  items: NavItem[];
+}
+
+function buildLocalizedHref(locale: string, href: string) {
+  return href === "/" ? `/${locale}` : `/${locale}${href}`;
+}
+
+const Navbar = ({ items }: NavbarProps) => {
+  const locale = useLocale();
   const pathname = usePathname();
 
   return (
@@ -14,14 +23,15 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex space-x-4">
-            {NAV_ITEMS.map((item) => (
+            {items.map((item) => (
               <NavLink
-                key={item.href}
+                key={`${item.kind}-${item.href}`}
                 item={item}
-                isActive={pathname === item.href}
+                href={buildLocalizedHref(locale, item.href)}
+                isActive={pathname === buildLocalizedHref(locale, item.href)}
               />
             ))}
-            <LocaleSwitcher />
+            <LocaleSwitcher items={items} />
           </div>
         </div>
       </div>
@@ -30,29 +40,26 @@ const Navbar = () => {
 };
 
 interface NavLinkProps {
-  item: {
-    label: string;
-    href: string;
-    description?: string;
-  };
+  item: NavItem;
+  href: string;
   isActive: boolean;
 }
 
-const NavLink = ({ item, isActive }: NavLinkProps) => {
+const NavLink = ({ item, href, isActive }: NavLinkProps) => {
   const t = useTranslations("Navigation");
 
   return (
     <Link
-      href={item.href}
+      href={href}
       className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
         isActive
           ? "text-blue-600 bg-blue-50"
           : "text-gray-700 hover:text-blue-600 hover:bg-gray-100"
       }`}
-      title={item.description}
+      title={item.kind === "static" ? t(item.description ?? "") : undefined}
       aria-current={isActive ? "page" : undefined}
     >
-      {t(item.label)}
+      {item.kind === "static" ? t(item.label) : item.label}
     </Link>
   );
 };

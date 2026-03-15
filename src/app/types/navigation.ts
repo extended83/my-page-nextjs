@@ -1,7 +1,9 @@
-import { NavItem } from '@/app/config/navigation';
+export type AppLocale = "en" | "pl";
 
-
-export interface NavigationProps {
-  items: NavItem[];
-  currentPath: string;
+export interface NavItem {
+  kind: "static" | "cms";
+  label: string;
+  href: string;
+  description?: string | null;
+  localizations?: Partial<Record<AppLocale, string>>;
 }

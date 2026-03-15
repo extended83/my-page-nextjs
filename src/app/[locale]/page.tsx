@@ -1,13 +1,18 @@
 import Link from "next/link";
-import { NAV_ITEMS } from "@/app/config/navigation";
-import { useTranslations } from "next-intl";
+import { AppLocale } from "@/app/types/navigation";
+import { getNavigationItems } from "@/lib/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
 
-export default function Home() {
-  // Filtrujemy, aby nie pokazywać linku do strony głównej
-  const navigationItems = NAV_ITEMS.filter((item) => item.href !== "/");
-  console.log({ navigationItems });
+function buildLocalizedHref(locale: string, href: string) {
+  return href === "/" ? `/${locale}` : `/${locale}${href}`;
+}
 
-  const t = useTranslations("Navigation");
+export default async function Home() {
+  const t = await getTranslations("Navigation");
+  const locale = (await getLocale()) as AppLocale;
+  const navigationItems = (await getNavigationItems(locale)).filter(
+    (item) => item.kind === "cms"
+  );
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -24,13 +29,15 @@ export default function Home() {
           {navigationItems.map((item) => (
             <Link
               key={item.href}
-              href={item.href}
+              href={buildLocalizedHref(locale, item.href)}
               className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
             >
               <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                {t(item.label)}
+                {item.label}
               </h2>
-              <p className="text-gray-600">{t(item.description)}</p>
+              <p className="text-gray-600">
+                {item.description || t("homeDescription")}
+              </p>
             </Link>
           ))}
         </div>

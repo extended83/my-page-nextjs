@@ -3,8 +3,10 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
+import { AppLocale } from "@/app/types/navigation";
 import Navbar from "@/components/Layout/Navbar";
 import { routing } from "@/i18n/routing";
+import { getNavigationItems } from "@/lib/navigation";
 
 export const metadata: Metadata = {
   title: "Moja Strona - Profesjonalne Usługi",
@@ -29,7 +31,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider>
       <div className="min-h-screen flex flex-col">
-        <Navbar />
+        <Navbar items={await getNavigationItems(locale as AppLocale)} />
         <main className="flex-grow">{children}</main>
       </div>
     </NextIntlClientProvider>
