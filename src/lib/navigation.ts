@@ -23,7 +23,6 @@ export function mapArticleToNavItem(article: Article): NavItem {
     kind: "cms",
     label: article.title,
     href: getLocalizedArticleHref(article),
-    description: article.description,
     localizations,
   };
 }

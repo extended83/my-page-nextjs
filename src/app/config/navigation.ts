@@ -4,5 +4,4 @@ export const HOME_NAV_ITEM: NavItem = {
   kind: "static",
   label: "home",
   href: "/",
-  description: "homeDescription",
 };

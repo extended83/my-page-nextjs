@@ -56,7 +56,6 @@ const NavLink = ({ item, href, isActive }: NavLinkProps) => {
           ? "text-blue-600 bg-blue-50"
           : "text-gray-700 hover:text-blue-600 hover:bg-gray-100"
       }`}
-      title={item.kind === "static" ? t(item.description ?? "") : undefined}
       aria-current={isActive ? "page" : undefined}
     >
       {item.kind === "static" ? t(item.label) : item.label}

@@ -1,16 +1,5 @@
 {
   "Navigation": {
-    "home": "Home",
-    "homeDescription": "Back to the homepage",
-    "about": "About us",
-    "aboutDescription": "Learn more about our company",
-    "offer": "Offer",
-    "offerDescription": "See our services",
-    "contact": "Contact",
-    "contactDescription": "Get in touch with us"
-  },
-  "About": {
-    "title": "About us",
-    "desc": "This is about us page."
+    "home": "Home"
   }
 }
