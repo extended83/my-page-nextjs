@@ -1,4 +1,4 @@
-import { getHomePage } from "@/api/utils/getData/getData";
+import { getPage } from "@/api/utils/getData/getData";
 import { AppLocale } from "@/app/types/navigation";
 import { HomeCards } from "@/components/Home/HomeCards";
 import { getLocale } from "next-intl/server";
@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 
 async function loader() {
   try {
-    const data = await getHomePage();
+    const data = await getPage("home-page");
     if (!data || !("data" in data) || !data.data) {
       notFound();
     }

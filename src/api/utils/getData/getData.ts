@@ -12,3 +12,12 @@ export async function getHomePage() {
     authToken: STRAPI_API_TOKEN,
   });
 }
+
+export async function getPage(pageUrl: string) {
+  const path = `/api/${pageUrl}`;
+  const url = new URL(path, BASE_URL);
+  return fetchApi(url.href, {
+    method: "GET",
+    authToken: STRAPI_API_TOKEN,
+  });
+}
