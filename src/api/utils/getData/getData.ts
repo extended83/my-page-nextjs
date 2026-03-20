@@ -1,7 +1,7 @@
 import { fetchApi } from "@/api/utils/fetchApi/fetchApi";
-import { getStrapiURL } from "@/api/utils/getStrapiUrl/getStrapiUrl";
+import { getStrapiUrl } from "@/api/utils/getStrapiUrl/getStrapiUrl";
 
-const BASE_URL = getStrapiURL();
+const BASE_URL = getStrapiUrl();
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
 
 export async function getHomePage() {

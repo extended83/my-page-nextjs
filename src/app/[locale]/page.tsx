@@ -1,12 +1,15 @@
 import { getPage } from "@/api/utils/getData/getData";
 import { AppLocale } from "@/app/types/navigation";
+import { BlockRenderer } from "@/components/blockRenderer/BlockRenderer";
 import { HomeCards } from "@/components/Home/HomeCards";
 import { getLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 async function loader() {
   try {
-    const data = await getPage("home-page");
+    const data = await getPage(
+      "home-page?populate[blocks][on][blocks.hero-section][populate][image][fields][0]=url&populate[blocks][on][blocks.hero-section][populate][image][fields][1]=alternativeText&populate[blocks][on][blocks.hero-section][populate][logo][populate][image][fields][0]=url&populate[blocks][on][blocks.hero-section][populate][logo][populate][image][fields][1]=alternativeText&populate[blocks][on][blocks.hero-section][populate][cta]=true",
+    );
     if (!data || !("data" in data) || !data.data) {
       notFound();
     }
@@ -22,6 +25,7 @@ export default async function Home() {
   const locale = (await getLocale()) as AppLocale;
 
   const data = await loader();
+  const blocks = data?.blocks || [];
   console.log({ data });
 
   return (
@@ -34,7 +38,7 @@ export default async function Home() {
           To jest przykładowa strona główna. Zapraszamy do zapoznania się z
           naszą ofertą.
         </p>
-
+        <BlockRenderer blocks={blocks} />
         <HomeCards locale={locale} />
       </div>
     </div>
