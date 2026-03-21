@@ -30,7 +30,7 @@ export const HeroSection = ({
   const themeClasses = themeClassMap[resolvedTheme];
 
   return (
-    <section className="relative left-1/2 isolate mb-[125px] min-h-[830px] w-screen -translate-x-1/2 pt-[220px]">
+    <section className="relative isolate mb-[125px] min-h-[830px] w-full pt-[220px]">
       <div className={`absolute inset-0 z-0 ${styles.background}`}>
         <StrapiImage
           src={image.url}

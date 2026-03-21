@@ -28,9 +28,9 @@ export default async function Home() {
   const blocks = data?.blocks || [];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="-mt-16 min-h-screen bg-gray-50">
+      <BlockRenderer blocks={blocks} />
       <div className="mx-auto max-w-[1200px] px-[24px]">
-        <BlockRenderer blocks={blocks} />
         <HomeCards locale={locale} />
       </div>
     </div>

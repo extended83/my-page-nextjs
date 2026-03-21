@@ -10,7 +10,10 @@ function buildLocalizedHref(locale: string, href: string) {
   return href === "/" ? `/${locale}` : `/${locale}${href}`;
 }
 
-export function LocaleSwitcher({ items }: LocaleSwitcherProps) {
+export function LocaleSwitcher({
+  items,
+  isTransparent = false,
+}: LocaleSwitcherProps) {
   const locale = useLocale();
   const pathname = usePathname();
   const switchTo = locale === "pl" ? "en" : "pl";
@@ -27,7 +30,11 @@ export function LocaleSwitcher({ items }: LocaleSwitcherProps) {
   return (
     <Link
       href={buildLocalizedHref(switchTo, targetHref)}
-      className="rounded border px-3 py-1"
+      className={`rounded border px-3 py-1 text-sm font-medium transition-colors ${
+        isTransparent
+          ? "border-white/70 bg-white/10 text-white hover:bg-white/20"
+          : "border-gray-200 bg-white text-gray-700 hover:bg-gray-100"
+      }`}
     >
       {switchTo.toUpperCase()}
     </Link>

@@ -31,8 +31,11 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider>
       <div className="flex min-h-screen flex-col">
-        <Navbar items={await getNavigationItems(locale as AppLocale)} />
-        <main className="flex-grow">{children}</main>
+        <Navbar
+          items={await getNavigationItems(locale as AppLocale)}
+          isTransparent
+        />
+        <main className="flex-grow pt-16">{children}</main>
       </div>
     </NextIntlClientProvider>
   );
