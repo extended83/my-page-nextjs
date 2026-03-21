@@ -33,7 +33,6 @@
 
 .description {
   display: flex;
-  padding-bottom: 28px;
   font-size: 1.2rem;
   max-width: 600px;
   color: var(--color-text-inverse);
@@ -45,6 +44,7 @@
   justify-content: center;
   min-height: 56px;
   padding: 0 28px;
+  margin-top: 28px;
   border-radius: 999px;
   font-size: 1rem;
   font-weight: 700;

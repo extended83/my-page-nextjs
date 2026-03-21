@@ -45,7 +45,7 @@ export const HeroSection = ({
         )}
       </div>
       <div className="relative z-10 mx-auto w-full max-w-[1200px] px-[48px]">
-        <div className={`mb-[65px] max-w-[720px] ${themeClasses.heading}`}>
+        <div className={`mb-[32px] max-w-[720px] ${themeClasses.heading}`}>
           <h1 className="text-[4rem] leading-[1.05] font-bold">{heading}</h1>
           {author && (
             <p
