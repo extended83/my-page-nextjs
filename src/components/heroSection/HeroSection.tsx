@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { StrapiImage } from "@/components/strapiImage/StrapiImage";
-import { HeroSectionProps } from "@/components/types";
 import styles from "@/components/heroSection/HeroSection.module.css";
+import type { HeroSectionProps } from "@/components/heroSection/HeroSection.types";
 
 const themeClassMap = {
   orange: {

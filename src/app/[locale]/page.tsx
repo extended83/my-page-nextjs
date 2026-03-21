@@ -1,7 +1,7 @@
 import { getPage } from "@/api/utils/getData/getData";
 import { AppLocale } from "@/app/types/navigation";
 import { BlockRenderer } from "@/components/blockRenderer/BlockRenderer";
-import { HomeCards } from "@/components/Home/HomeCards";
+import { HomeCards } from "@/components/homeCards/HomeCards";
 import { getLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 

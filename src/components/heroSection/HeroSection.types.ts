@@ -1,0 +1,17 @@
+import type {
+  BaseBlock,
+  ImageProps,
+  LinkProps,
+  LogoProps,
+  Theme,
+} from "@/types/types";
+
+export interface HeroSectionProps extends BaseBlock<"blocks.hero-section"> {
+  theme: Theme;
+  heading: string;
+  image: ImageProps;
+  cta?: LinkProps;
+  logo?: LogoProps;
+  author?: string;
+  darken?: boolean;
+}

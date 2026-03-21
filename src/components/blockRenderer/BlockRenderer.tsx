@@ -1,5 +1,8 @@
 import { HeroSection } from "@/components/heroSection/HeroSection";
-import { Block } from "@/components/types";
+import type {
+  Block,
+  BlockRendererProps,
+} from "@/components/blockRenderer/BlockRenderer.types";
 
 const blockRenderer = (block: Block, index: number) => {
   switch (block.__component) {
@@ -12,6 +15,6 @@ const blockRenderer = (block: Block, index: number) => {
   }
 };
 
-export const BlockRenderer = ({ blocks }: { blocks: Block[] }) => {
+export const BlockRenderer = ({ blocks }: BlockRendererProps) => {
   return blocks.map((block, index) => blockRenderer(block, index));
 };

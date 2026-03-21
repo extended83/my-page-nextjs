@@ -17,9 +17,11 @@ export interface LogoProps {
   image: ImageProps;
 }
 
-type ComponentType = "blocks.hero-section" | "blocks.info-block";
+export type Theme = "turquoise" | "orange";
 
-interface Base<
+export type ComponentType = "blocks.hero-section" | "blocks.info-block";
+
+export interface BaseBlock<
   T extends ComponentType,
   D extends object = Record<string, unknown>,
 > {
@@ -32,20 +34,8 @@ interface Base<
   data?: D;
 }
 
-export type Block = HeroSectionProps | InfoBlockProps;
-
-export interface HeroSectionProps extends Base<"blocks.hero-section"> {
-  theme: "turquoise" | "orange";
-  heading: string;
-  image: ImageProps;
-  cta?: LinkProps;
-  logo?: LogoProps;
-  author?: string;
-  darken?: boolean;
-}
-
-export interface InfoBlockProps extends Base<"blocks.info-block"> {
-  theme: "turquoise" | "orange";
+export interface InfoBlockProps extends BaseBlock<"blocks.info-block"> {
+  theme: Theme;
   reversed?: boolean;
   headline: string;
   content: string;
