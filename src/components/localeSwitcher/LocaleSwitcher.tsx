@@ -30,7 +30,7 @@ export function LocaleSwitcher({
   return (
     <Link
       href={buildLocalizedHref(switchTo, targetHref)}
-      className={`rounded border px-3 py-1 text-sm font-medium transition-colors ${
+      className={`flex items-center rounded border px-3 py-1 text-sm font-medium transition-colors ${
         isTransparent
           ? "border-white/70 bg-white/10 text-white hover:bg-white/20"
           : "border-gray-200 bg-white text-gray-700 hover:bg-gray-100"
