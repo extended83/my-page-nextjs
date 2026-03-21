@@ -31,6 +31,14 @@
   color: var(--color-text-inverse);
 }
 
+.description {
+  display: flex;
+  padding-bottom: 28px;
+  font-size: 1.2rem;
+  max-width: 600px;
+  color: var(--color-text-inverse);
+}
+
 .cta {
   display: inline-flex;
   align-items: center;

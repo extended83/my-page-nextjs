@@ -9,6 +9,7 @@ import type {
 export interface HeroSectionProps extends BaseBlock<"blocks.hero-section"> {
   theme: Theme;
   heading: string;
+  description?: string;
   image: ImageProps;
   cta?: LinkProps;
   logo?: LogoProps;

@@ -19,6 +19,7 @@ const themeClassMap = {
 export const HeroSection = ({
   theme,
   heading,
+  description,
   cta,
   image,
   logo,
@@ -61,6 +62,7 @@ export const HeroSection = ({
             </p>
           )}
         </div>
+        {description && <div className={styles.description}>{description}</div>}
         {cta && (
           <Link
             href={cta.href ?? "#"}
