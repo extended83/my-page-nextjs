@@ -1,6 +1,20 @@
 import Link from "next/link";
 import { StrapiImage } from "@/components/strapiImage/StrapiImage";
 import { HeroSectionProps } from "@/components/types";
+import styles from "@/components/heroSection/HeroSection.module.css";
+
+const themeClassMap = {
+  orange: {
+    cta: styles.ctaOrange,
+    heading: styles.headlineOrange,
+    logo: styles.logoOrange,
+  },
+  turquoise: {
+    cta: styles.ctaTurquoise,
+    heading: styles.headlineOrange,
+    logo: "",
+  },
+} as const;
 
 export const HeroSection = ({
   theme,
@@ -12,43 +26,62 @@ export const HeroSection = ({
   publishedAt,
   darken = false,
 }: Readonly<HeroSectionProps>) => {
-  console.log({ image });
+  const resolvedTheme = theme === "turquoise" ? "turquoise" : "orange";
+  const themeClasses = themeClassMap[resolvedTheme];
 
   return (
-    <section className="hero">
-      <div className="hero__background">
+    <section className="relative left-1/2 isolate mb-[125px] min-h-[830px] w-screen -translate-x-1/2 pt-[220px]">
+      <div className={`absolute inset-0 z-0 ${styles.background}`}>
         <StrapiImage
           src={image.url}
           alt={image.alternativeText || "No alternative text provided"}
-          className="hero__background-image"
+          className={`h-full w-full object-cover object-center object-bottom ${styles.backgroundImage}`}
           width={1920}
           height={1080}
         />
-        {darken && <div className="hero__background__overlay"></div>}
+        {darken && (
+          <div className={`absolute inset-0 ${styles.backgroundOverlay}`}></div>
+        )}
       </div>
-      <div className={`hero__heading hero__heading--${theme}`}>
-        <h1>{heading}</h1>
-        {author && <p className="hero__author">{author}</p>}
-        {publishedAt && <p className="hero__published-at">{publishedAt}</p>}
-      </div>
-      {cta && (
-        <button className={`btn btn--medium btn--${theme}`}>
+      <div className="relative z-10 mx-auto w-full max-w-[1200px] px-[48px]">
+        <div className={`mb-[65px] max-w-[720px] ${themeClasses.heading}`}>
+          <h1 className="text-[4rem] leading-[1.05] font-bold">{heading}</h1>
+          {author && (
+            <p
+              className={`mt-[10px] mb-[10px] text-[1.125rem] font-bold ${styles.metaText}`}
+            >
+              {author}
+            </p>
+          )}
+          {publishedAt && (
+            <p
+              className={`mt-[10px] text-[1.125rem] font-normal ${styles.metaText}`}
+            >
+              {publishedAt}
+            </p>
+          )}
+        </div>
+        {cta && (
           <Link
             href={cta.href ?? "#"}
             target={cta.isExternal ? "_blank" : "_self"}
+            rel={cta.isExternal ? "noreferrer" : undefined}
+            className={`${styles.cta} ${themeClasses.cta}`}
           >
             {cta.text}
           </Link>
-        </button>
-      )}
+        )}
+      </div>
       {logo && (
-        <StrapiImage
-          src={logo.image.url}
-          alt={logo.image.alternativeText || "No alternative text provided"}
-          className={`hero__logo hero__logo--${theme}`}
-          width={120}
-          height={120}
-        />
+        <div className="absolute bottom-0 left-1/2 z-10 translate-x-[-50%] translate-y-[50%]">
+          <StrapiImage
+            src={logo.image.url}
+            alt={logo.image.alternativeText || "No alternative text provided"}
+            className={`h-[120px] w-[120px] ${themeClasses.logo}`}
+            width={120}
+            height={120}
+          />
+        </div>
       )}
     </section>
   );

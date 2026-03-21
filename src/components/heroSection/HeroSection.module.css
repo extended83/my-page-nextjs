@@ -1,0 +1,74 @@
+.background {
+  border-bottom-left-radius: var(--radius-hero-bottom);
+  border-bottom-right-radius: var(--radius-hero-bottom);
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-hero-overlay-strong);
+  border-bottom-left-radius: var(--radius-hero-bottom);
+  border-bottom-right-radius: var(--radius-hero-bottom);
+}
+
+.backgroundImage {
+  border-bottom-left-radius: var(--radius-hero-bottom);
+  border-bottom-right-radius: var(--radius-hero-bottom);
+}
+
+.backgroundOverlay {
+  background-color: var(--color-hero-overlay-soft);
+  border-bottom-left-radius: var(--radius-hero-bottom);
+  border-bottom-right-radius: var(--radius-hero-bottom);
+}
+
+.headlineOrange {
+  color: var(--color-text-inverse);
+}
+
+.metaText {
+  color: var(--color-text-inverse);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 0 28px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-hero-cta);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cta:hover {
+  transform: translateY(-1px);
+}
+
+.ctaOrange {
+  background-color: var(--color-brand-orange);
+}
+
+.ctaOrange:hover {
+  background-color: var(--color-brand-orange-hover);
+}
+
+.ctaTurquoise {
+  background-color: var(--color-brand-turquoise);
+}
+
+.ctaTurquoise:hover {
+  background-color: var(--color-brand-turquoise-hover);
+}
+
+.logoOrange {
+  filter: invert(62%) sepia(21%) saturate(1646%) hue-rotate(348deg)
+    brightness(88%) contrast(81%);
+}
