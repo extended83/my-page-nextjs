@@ -1,0 +1,7 @@
+.linkInverse {
+  color: var(--color-text-inverse);
+}
+
+.linkPrimary {
+  color: var(--color-text-primary);
+}

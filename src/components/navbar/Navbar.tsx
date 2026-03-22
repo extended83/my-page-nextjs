@@ -1,39 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { LocaleSwitcher } from "@/components/localeSwitcher/LocaleSwitcher";
-import type {
-  NavbarProps,
-  NavLinkProps,
-} from "@/components/navbar/Navbar.types";
-import { useLocale, useTranslations } from "next-intl";
+import type { NavbarProps } from "@/components/navbar/Navbar.types";
+import { NavLink } from "@/components/navbar/NavLink";
+import { useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
-import type { CSSProperties } from "react";
+import styles from "@/components/navbar/Navbar.module.css";
 
 function buildLocalizedHref(locale: string, href: string) {
   return href === "/" ? `/${locale}` : `/${locale}${href}`;
 }
-
-const linkToneClassMap = {
-  inverse: {
-    active: "bg-white/20",
-    inactive: "hover:bg-white/10",
-  },
-  primary: {
-    active: "bg-black/10",
-    inactive: "hover:bg-black/5",
-  },
-} as const;
-
-const linkToneStyleMap: Record<"primary" | "inverse", CSSProperties> = {
-  inverse: {
-    color: "var(--color-text-inverse)",
-  },
-  primary: {
-    color: "var(--color-text-primary)",
-  },
-};
 
 const Navbar = ({
   items,
@@ -71,16 +48,7 @@ const Navbar = ({
     : "bg-white shadow-md transition-colors";
 
   return (
-    <nav
-      className={navClassName}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000,
-      }}
-    >
+    <nav className={`${styles.navbar} ${navClassName}`}>
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex h-16 items-center justify-between">
           <div className="flex space-x-4">
@@ -102,30 +70,6 @@ const Navbar = ({
         </div>
       </div>
     </nav>
-  );
-};
-
-const NavLink = ({
-  item,
-  href,
-  isActive,
-  textTone = "primary",
-}: NavLinkProps) => {
-  const t = useTranslations("Navigation");
-  const toneClasses = linkToneClassMap[textTone];
-  const toneStyles = linkToneStyleMap[textTone];
-
-  return (
-    <Link
-      href={href}
-      className={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-        isActive ? toneClasses.active : toneClasses.inactive
-      }`}
-      style={toneStyles}
-      aria-current={isActive ? "page" : undefined}
-    >
-      {item.kind === "static" ? t(item.label) : item.label}
-    </Link>
   );
 };
 
