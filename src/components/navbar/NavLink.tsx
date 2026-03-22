@@ -30,7 +30,7 @@ export function NavLink({
   return (
     <Link
       href={href}
-      className={`${toneClasses.text} uppercase rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+      className={`${toneClasses.text} tracking-[0.02rem] uppercase rounded-md px-3 py-2 text-[0.9rem] font-bold transition-colors ${
         isActive ? toneClasses.active : toneClasses.inactive
       }`}
       aria-current={isActive ? "page" : undefined}
