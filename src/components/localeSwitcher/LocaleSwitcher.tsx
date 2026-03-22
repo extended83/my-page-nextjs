@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import type { NavItem } from "@/app/types/navigation";
 import type { LocaleSwitcherProps } from "@/components/localeSwitcher/LocaleSwitcher.types";
 import { useLocale } from "next-intl";
@@ -10,9 +11,37 @@ function buildLocalizedHref(locale: string, href: string) {
   return href === "/" ? `/${locale}` : `/${locale}${href}`;
 }
 
+function getLocaleSwitcherStyle(
+  isTransparent: boolean,
+  textTone: "primary" | "inverse",
+): CSSProperties {
+  if (!isTransparent) {
+    return {
+      color: "var(--color-text-primary)",
+      backgroundColor: "#ffffff",
+      borderColor: "#e5e7eb",
+    };
+  }
+
+  if (textTone === "inverse") {
+    return {
+      color: "var(--color-text-inverse)",
+      backgroundColor: "rgb(255 255 255 / 0.10)",
+      borderColor: "rgb(255 255 255 / 0.70)",
+    };
+  }
+
+  return {
+    color: "var(--color-text-primary)",
+    backgroundColor: "rgb(255 255 255 / 0.65)",
+    borderColor: "rgb(17 33 29 / 0.20)",
+  };
+}
+
 export function LocaleSwitcher({
   items,
   isTransparent = false,
+  textTone = "primary",
 }: LocaleSwitcherProps) {
   const locale = useLocale();
   const pathname = usePathname();
@@ -30,11 +59,8 @@ export function LocaleSwitcher({
   return (
     <Link
       href={buildLocalizedHref(switchTo, targetHref)}
-      className={`flex items-center rounded border px-3 py-1 text-sm font-medium transition-colors ${
-        isTransparent
-          ? "border-white/70 bg-white/10 text-white hover:bg-white/20"
-          : "border-gray-200 bg-white text-gray-700 hover:bg-gray-100"
-      }`}
+      className="flex items-center rounded border px-3 py-1 text-sm font-medium transition-colors"
+      style={getLocaleSwitcherStyle(isTransparent, textTone)}
     >
       {switchTo.toUpperCase()}
     </Link>

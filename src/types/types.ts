@@ -18,6 +18,7 @@ export interface LogoProps {
 }
 
 export type Theme = "turquoise" | "orange";
+export type TextTone = "primary" | "inverse";
 
 export type ComponentType = "blocks.hero-section" | "blocks.info-block";
 

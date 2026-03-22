@@ -27,8 +27,16 @@
   color: var(--color-text-inverse);
 }
 
+.headlinePrimary {
+  color: var(--color-text-primary);
+}
+
 .metaText {
   color: var(--color-text-inverse);
+}
+
+.metaTextPrimary {
+  color: var(--color-text-primary);
 }
 
 .description {
@@ -36,6 +44,13 @@
   font-size: 1.2rem;
   max-width: 600px;
   color: var(--color-text-inverse);
+}
+
+.descriptionPrimary {
+  display: flex;
+  font-size: 1.2rem;
+  max-width: 600px;
+  color: var(--color-text-primary);
 }
 
 .cta {

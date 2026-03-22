@@ -9,12 +9,38 @@ import type {
 } from "@/components/navbar/Navbar.types";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
+import type { CSSProperties } from "react";
 
 function buildLocalizedHref(locale: string, href: string) {
   return href === "/" ? `/${locale}` : `/${locale}${href}`;
 }
 
-const Navbar = ({ items, isTransparent = false }: NavbarProps) => {
+const linkToneClassMap = {
+  inverse: {
+    active: "bg-white/20",
+    inactive: "hover:bg-white/10",
+  },
+  primary: {
+    active: "bg-black/10",
+    inactive: "hover:bg-black/5",
+  },
+} as const;
+
+const linkToneStyleMap: Record<"primary" | "inverse", CSSProperties> = {
+  inverse: {
+    color: "var(--color-text-inverse)",
+  },
+  primary: {
+    color: "var(--color-text-primary)",
+  },
+};
+
+const Navbar = ({
+  items,
+  isTransparent = false,
+  overlayTextTone = "inverse",
+  solidTextTone = "primary",
+}: NavbarProps) => {
   const locale = useLocale();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,6 +63,9 @@ const Navbar = ({ items, isTransparent = false }: NavbarProps) => {
   }, []);
 
   const shouldRenderTransparent = useTransparentMode && !isScrolled;
+  const currentTextTone = shouldRenderTransparent
+    ? overlayTextTone
+    : solidTextTone;
   const navClassName = shouldRenderTransparent
     ? "bg-transparent transition-colors"
     : "bg-white shadow-md transition-colors";
@@ -61,12 +90,13 @@ const Navbar = ({ items, isTransparent = false }: NavbarProps) => {
                 item={item}
                 href={buildLocalizedHref(locale, item.href)}
                 isActive={pathname === buildLocalizedHref(locale, item.href)}
-                isTransparent={shouldRenderTransparent}
+                textTone={currentTextTone}
               />
             ))}
             <LocaleSwitcher
               items={items}
               isTransparent={shouldRenderTransparent}
+              textTone={currentTextTone}
             />
           </div>
         </div>
@@ -79,22 +109,19 @@ const NavLink = ({
   item,
   href,
   isActive,
-  isTransparent = false,
+  textTone = "primary",
 }: NavLinkProps) => {
   const t = useTranslations("Navigation");
+  const toneClasses = linkToneClassMap[textTone];
+  const toneStyles = linkToneStyleMap[textTone];
 
   return (
     <Link
       href={href}
       className={`rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-        isActive
-          ? isTransparent
-            ? "bg-white/20 text-white"
-            : "bg-blue-50 text-blue-600"
-          : isTransparent
-            ? "text-white hover:bg-white/10"
-            : "text-gray-700 hover:bg-gray-100 hover:text-blue-600"
+        isActive ? toneClasses.active : toneClasses.inactive
       }`}
+      style={toneStyles}
       aria-current={isActive ? "page" : undefined}
     >
       {item.kind === "static" ? t(item.label) : item.label}

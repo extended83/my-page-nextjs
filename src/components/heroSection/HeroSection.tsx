@@ -6,13 +6,24 @@ import type { HeroSectionProps } from "@/components/heroSection/HeroSection.type
 const themeClassMap = {
   orange: {
     cta: styles.ctaOrange,
-    heading: styles.headlineOrange,
     logo: styles.logoOrange,
   },
   turquoise: {
     cta: styles.ctaTurquoise,
-    heading: styles.headlineOrange,
     logo: "",
+  },
+} as const;
+
+const textToneClassMap = {
+  inverse: {
+    heading: styles.headlineOrange,
+    meta: styles.metaText,
+    description: styles.description,
+  },
+  primary: {
+    heading: styles.headlinePrimary,
+    meta: styles.metaTextPrimary,
+    description: styles.descriptionPrimary,
   },
 } as const;
 
@@ -26,9 +37,11 @@ export const HeroSection = ({
   author,
   publishedAt,
   darken = false,
+  textTone = "inverse",
 }: Readonly<HeroSectionProps>) => {
   const resolvedTheme = theme === "turquoise" ? "turquoise" : "orange";
   const themeClasses = themeClassMap[resolvedTheme];
+  const textToneClasses = textToneClassMap[textTone];
 
   return (
     <section className="relative isolate mb-[125px] min-h-[830px] w-full pt-[220px]">
@@ -45,24 +58,26 @@ export const HeroSection = ({
         )}
       </div>
       <div className="relative z-10 mx-auto w-full max-w-[1200px] px-[48px]">
-        <div className={`mb-[32px] max-w-[720px] ${themeClasses.heading}`}>
+        <div className={`mb-[32px] max-w-[720px] ${textToneClasses.heading}`}>
           <h1 className="text-[4rem] leading-[1.05] font-bold">{heading}</h1>
           {author && (
             <p
-              className={`mt-[10px] mb-[10px] text-[1.125rem] font-bold ${styles.metaText}`}
+              className={`mt-[10px] mb-[10px] text-[1.125rem] font-bold ${textToneClasses.meta}`}
             >
               {author}
             </p>
           )}
           {publishedAt && (
             <p
-              className={`mt-[10px] text-[1.125rem] font-normal ${styles.metaText}`}
+              className={`mt-[10px] text-[1.125rem] font-normal ${textToneClasses.meta}`}
             >
               {publishedAt}
             </p>
           )}
         </div>
-        {description && <div className={styles.description}>{description}</div>}
+        {description && (
+          <div className={textToneClasses.description}>{description}</div>
+        )}
         {cta && (
           <Link
             href={cta.href ?? "#"}

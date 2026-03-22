@@ -4,6 +4,7 @@ import type {
   LinkProps,
   LogoProps,
   Theme,
+  TextTone,
 } from "@/types/types";
 
 export interface HeroSectionProps extends BaseBlock<"blocks.hero-section"> {
@@ -15,4 +16,5 @@ export interface HeroSectionProps extends BaseBlock<"blocks.hero-section"> {
   logo?: LogoProps;
   author?: string;
   darken?: boolean;
+  textTone?: TextTone;
 }
