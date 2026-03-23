@@ -16,5 +16,6 @@ export interface HeroSectionProps extends BaseBlock<"blocks.hero-section"> {
   logo?: LogoProps;
   author?: string;
   darken?: boolean;
+  isGradientOverlay?: boolean;
   textTone?: TextTone;
 }

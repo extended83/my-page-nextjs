@@ -3,24 +3,41 @@
   border-bottom-right-radius: var(--radius-hero-bottom);
 }
 
-.background::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: var(--color-hero-overlay-strong);
-  border-bottom-left-radius: var(--radius-hero-bottom);
-  border-bottom-right-radius: var(--radius-hero-bottom);
-}
-
 .backgroundImage {
   border-bottom-left-radius: var(--radius-hero-bottom);
   border-bottom-right-radius: var(--radius-hero-bottom);
 }
 
 .backgroundOverlay {
-  background-color: var(--color-hero-overlay-soft);
+  position: absolute;
+  inset: 0;
   border-bottom-left-radius: var(--radius-hero-bottom);
   border-bottom-right-radius: var(--radius-hero-bottom);
+  pointer-events: none;
+}
+
+.backgroundOverlayBase {
+  --hero-overlay-current: var(--color-hero-overlay-strong);
+  --hero-overlay-current-darker: rgb(0 0 0 / 30%);
+}
+
+.backgroundOverlayDark {
+  --hero-overlay-current: rgb(0 0 0 / 36%);
+  --hero-overlay-current-darker: rgb(0 0 0 / 43%);
+}
+
+.backgroundOverlaySolid {
+  background-color: var(--hero-overlay-current);
+}
+
+.backgroundOverlayGradient {
+  background: linear-gradient(
+    180deg,
+    var(--hero-overlay-current-darker) 0%,
+    var(--hero-overlay-current-darker) 10%,
+    var(--hero-overlay-current) 30%,
+    var(--hero-overlay-current) 100%
+  );
 }
 
 .headlineOrange {

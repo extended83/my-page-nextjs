@@ -37,11 +37,18 @@ export const HeroSection = ({
   author,
   publishedAt,
   darken = false,
+  isGradientOverlay = true,
   textTone = "inverse",
 }: Readonly<HeroSectionProps>) => {
   const resolvedTheme = theme === "turquoise" ? "turquoise" : "orange";
   const themeClasses = themeClassMap[resolvedTheme];
   const textToneClasses = textToneClassMap[textTone];
+  const overlayShadeClass = darken
+    ? styles.backgroundOverlayDark
+    : styles.backgroundOverlayBase;
+  const overlayVariantClass = isGradientOverlay
+    ? styles.backgroundOverlayGradient
+    : styles.backgroundOverlaySolid;
 
   return (
     <section className="relative isolate mb-[125px] min-h-[830px] w-full pt-[220px]">
@@ -53,9 +60,9 @@ export const HeroSection = ({
           width={1920}
           height={1080}
         />
-        {darken && (
-          <div className={`absolute inset-0 ${styles.backgroundOverlay}`}></div>
-        )}
+        <div
+          className={`${styles.backgroundOverlay} ${overlayShadeClass} ${overlayVariantClass}`}
+        ></div>
       </div>
       <div className="relative z-10 mx-auto w-full max-w-[1200px] px-[48px]">
         <div className={`mb-[32px] max-w-[720px] ${textToneClasses.heading}`}>
