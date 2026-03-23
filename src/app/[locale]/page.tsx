@@ -4,12 +4,40 @@ import { BlockRenderer } from "@/components/blockRenderer/BlockRenderer";
 import { HomeCards } from "@/components/homeCards/HomeCards";
 import { getLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { stringify } from "qs";
+
+const homePageQuery = stringify(
+  {
+    populate: {
+      blocks: {
+        on: {
+          "blocks.hero-section": {
+            populate: {
+              image: {
+                fields: ["url", "alternativeText"],
+              },
+              logo: {
+                populate: {
+                  image: {
+                    fields: ["url", "alternativeText"],
+                  },
+                },
+              },
+              cta: true,
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    encodeValuesOnly: true,
+  },
+);
 
 async function loader() {
   try {
-    const data = await getPage(
-      "home-page?populate[blocks][on][blocks.hero-section][populate][image][fields][0]=url&populate[blocks][on][blocks.hero-section][populate][image][fields][1]=alternativeText&populate[blocks][on][blocks.hero-section][populate][logo][populate][image][fields][0]=url&populate[blocks][on][blocks.hero-section][populate][logo][populate][image][fields][1]=alternativeText&populate[blocks][on][blocks.hero-section][populate][cta]=true",
-    );
+    const data = await getPage(`home-page?${homePageQuery}`);
     if (!data || !("data" in data) || !data.data) {
       notFound();
     }
@@ -27,6 +55,8 @@ export default async function Home() {
   const data = await loader();
   const blocks = data?.blocks || [];
 
+  console.log({ blocks });
+
   return (
     <div className="-mt-16 min-h-screen bg-gray-50">
       <BlockRenderer blocks={blocks} />
@@ -36,3 +66,4 @@ export default async function Home() {
     </div>
   );
 }
+
