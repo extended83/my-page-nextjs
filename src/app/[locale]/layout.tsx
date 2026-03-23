@@ -34,7 +34,7 @@ export default async function LocaleLayout({
         <Navbar
           items={await getNavigationItems(locale as AppLocale)}
           isTransparent
-          overlayTextTone="inverse"
+          overlayTextTone="primary"
           solidTextTone="primary"
         />
         <main className="flex-grow pt-16">{children}</main>

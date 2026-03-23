@@ -16,27 +16,16 @@
   pointer-events: none;
 }
 
-.backgroundOverlayBase {
-  --hero-overlay-current: var(--color-hero-overlay-strong);
-  --hero-overlay-current-darker: rgb(0 0 0 / 30%);
-}
-
-.backgroundOverlayDark {
-  --hero-overlay-current: rgb(0 0 0 / 36%);
-  --hero-overlay-current-darker: rgb(0 0 0 / 43%);
-}
-
 .backgroundOverlaySolid {
-  background-color: var(--hero-overlay-current);
+  background-color: var(--hero-overlay-solid);
 }
 
 .backgroundOverlayGradient {
   background: linear-gradient(
     180deg,
-    var(--hero-overlay-current-darker) 0%,
-    var(--hero-overlay-current-darker) 10%,
-    var(--hero-overlay-current) 30%,
-    var(--hero-overlay-current) 100%
+    var(--hero-overlay-top) 0%,
+    var(--hero-overlay-top) 25%,
+    var(--hero-overlay-bottom) 100%
   );
 }
 
