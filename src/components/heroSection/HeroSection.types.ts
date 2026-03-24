@@ -11,6 +11,7 @@ export interface HeroSectionProps extends BaseBlock<"blocks.hero-section"> {
   theme: Theme;
   heading: string;
   description?: string;
+  contentLayout?: "left" | "center";
   image: ImageProps;
   cta?: LinkProps;
   logo?: LogoProps;

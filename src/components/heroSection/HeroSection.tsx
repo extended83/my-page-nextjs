@@ -18,6 +18,7 @@ export const HeroSection = ({
   logo,
   author,
   publishedAt,
+  contentLayout = "center",
   overlayTone = "light",
   overlayColor = null,
   overlayStrength = "high",
@@ -25,6 +26,7 @@ export const HeroSection = ({
   textTone = "primary",
   bottomRadius = 150,
 }: Readonly<HeroSectionProps>) => {
+  const isCenteredContent = contentLayout === "center";
   const themeClasses = getThemeClasses(theme);
   const textToneClasses = getTextToneClasses(textTone);
   const overlayVariantClass = getOverlayVariantClass(hasOverlayGradient);
@@ -52,37 +54,47 @@ export const HeroSection = ({
           className={`${styles.backgroundOverlay} ${overlayVariantClass}`}
         ></div>
       </div>
-      <div className="relative z-10 mx-auto w-full max-w-[1200px] px-[48px]">
-        <div className={`mb-[32px] max-w-[720px] ${textToneClasses.heading}`}>
-          <h1 className="text-[4rem] leading-[1.05] font-bold">{heading}</h1>
-          {author && (
-            <p
-              className={`mt-[10px] mb-[10px] text-[1.125rem] font-bold ${textToneClasses.meta}`}
-            >
-              {author}
-            </p>
+      <div
+        className={`relative z-10 mx-auto w-full max-w-[1200px] px-[48px] ${
+          isCenteredContent ? "flex justify-center text-center" : ""
+        }`}
+      >
+        <div
+          className={`flex flex-col ${
+            isCenteredContent ? "items-center" : "items-start"
+          }`}
+        >
+          <div className={`mb-[32px] max-w-[720px] ${textToneClasses.heading}`}>
+            <h1 className="text-[4rem] leading-[1.05] font-bold">{heading}</h1>
+            {author && (
+              <p
+                className={`mt-[10px] mb-[10px] text-[1.125rem] font-bold ${textToneClasses.meta}`}
+              >
+                {author}
+              </p>
+            )}
+            {publishedAt && (
+              <p
+                className={`mt-[10px] text-[1.125rem] font-normal ${textToneClasses.meta}`}
+              >
+                {publishedAt}
+              </p>
+            )}
+          </div>
+          {description && (
+            <div className={textToneClasses.description}>{description}</div>
           )}
-          {publishedAt && (
-            <p
-              className={`mt-[10px] text-[1.125rem] font-normal ${textToneClasses.meta}`}
+          {cta && (
+            <Link
+              href={cta.href ?? "#"}
+              target={cta.isExternal ? "_blank" : "_self"}
+              rel={cta.isExternal ? "noreferrer" : undefined}
+              className={`${styles.cta} ${themeClasses.cta}`}
             >
-              {publishedAt}
-            </p>
+              {cta.text}
+            </Link>
           )}
         </div>
-        {description && (
-          <div className={textToneClasses.description}>{description}</div>
-        )}
-        {cta && (
-          <Link
-            href={cta.href ?? "#"}
-            target={cta.isExternal ? "_blank" : "_self"}
-            rel={cta.isExternal ? "noreferrer" : undefined}
-            className={`${styles.cta} ${themeClasses.cta}`}
-          >
-            {cta.text}
-          </Link>
-        )}
       </div>
       {logo && (
         <div className="absolute bottom-0 left-1/2 z-10 translate-x-[-50%] translate-y-[50%]">
