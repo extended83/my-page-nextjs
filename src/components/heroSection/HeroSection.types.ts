@@ -20,4 +20,5 @@ export interface HeroSectionProps extends BaseBlock<"blocks.hero-section"> {
   overlayStrength?: "low" | "medium" | "high" | "strong";
   hasOverlayGradient?: boolean;
   textTone?: TextTone;
+  bottomRadius?: number | null;
 }

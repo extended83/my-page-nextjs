@@ -49,6 +49,8 @@ const overlayAlphaMap = {
   },
 } as const;
 
+const DEFAULT_BOTTOM_RADIUS = 200;
+
 const expandHex = (value: string) =>
   value
     .split("")
@@ -120,10 +122,25 @@ export const getOverlayStyle = ({
       baseOverlayColor,
       overlayAlpha.solid,
     ),
-    "--hero-overlay-top": createOverlayColor(baseOverlayColor, overlayAlpha.top),
+    "--hero-overlay-top": createOverlayColor(
+      baseOverlayColor,
+      overlayAlpha.top,
+    ),
     "--hero-overlay-bottom": createOverlayColor(
       baseOverlayColor,
       overlayAlpha.bottom,
     ),
   } as CSSProperties;
 };
+
+export const getHeroSectionStyle = ({
+  bottomRadius = DEFAULT_BOTTOM_RADIUS,
+  ...overlayProps
+}: Pick<
+  HeroSectionProps,
+  "overlayColor" | "overlayTone" | "overlayStrength" | "bottomRadius"
+>): CSSProperties =>
+  ({
+    "--radius-hero-bottom": bottomRadius === null ? 0 : `${bottomRadius}px`,
+    ...getOverlayStyle(overlayProps),
+  }) as CSSProperties;

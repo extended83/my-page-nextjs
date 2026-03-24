@@ -3,7 +3,7 @@ import { StrapiImage } from "@/components/strapiImage/StrapiImage";
 import styles from "@/components/heroSection/HeroSection.module.css";
 import type { HeroSectionProps } from "@/components/heroSection/HeroSection.types";
 import {
-  getOverlayStyle,
+  getHeroSectionStyle,
   getOverlayVariantClass,
   getTextToneClasses,
   getThemeClasses,
@@ -23,18 +23,23 @@ export const HeroSection = ({
   overlayStrength = "high",
   hasOverlayGradient = true,
   textTone = "primary",
+  bottomRadius = 150,
 }: Readonly<HeroSectionProps>) => {
   const themeClasses = getThemeClasses(theme);
   const textToneClasses = getTextToneClasses(textTone);
   const overlayVariantClass = getOverlayVariantClass(hasOverlayGradient);
-  const overlayStyle = getOverlayStyle({
+  const heroSectionStyle = getHeroSectionStyle({
     overlayColor,
     overlayTone,
     overlayStrength,
+    bottomRadius,
   });
 
   return (
-    <section className="relative isolate mb-[125px] min-h-[830px] w-full pt-[220px]">
+    <section
+      className="relative isolate mb-[125px] min-h-[830px] w-full pt-[220px]"
+      style={heroSectionStyle}
+    >
       <div className={`absolute inset-0 z-0 ${styles.background}`}>
         <StrapiImage
           src={image.url}
@@ -45,7 +50,6 @@ export const HeroSection = ({
         />
         <div
           className={`${styles.backgroundOverlay} ${overlayVariantClass}`}
-          style={overlayStyle}
         ></div>
       </div>
       <div className="relative z-10 mx-auto w-full max-w-[1200px] px-[48px]">
