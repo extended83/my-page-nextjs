@@ -47,8 +47,7 @@ export const HeroSection = ({
           src={image.url}
           alt={image.alternativeText || "No alternative text provided"}
           className={`h-full w-full object-cover object-center object-bottom ${styles.backgroundImage}`}
-          width={1920}
-          height={1080}
+          fill
         />
         <div
           className={`${styles.backgroundOverlay} ${overlayVariantClass}`}
